@@ -1,0 +1,34 @@
+using livrosdigitais.Models;
+using livrosdigitais.Data;
+
+namespace livrosdigitais.Data;
+
+public class LivrosRepositorios
+{
+    private readonly AppDbContext_context;
+
+    public LivrosRepositorios(AppDbContext context)
+    {
+        _context = context;
+    }
+    public List<Livro> PuxarLivros()
+    {
+        return_context.livros.ToList();
+    }
+
+    public void Adicionar(Liv liv)
+    {
+        _context.livros.Add(liv);
+        _context.SaveChanges();
+    }
+    public void Deletar(int id)
+    {
+        var liv = _context.livros.Find(id);
+        if(liv != null)
+        {
+            _context.livros.Remove(liv);
+            _context.SaveChanges();
+        }
+    }
+
+}
